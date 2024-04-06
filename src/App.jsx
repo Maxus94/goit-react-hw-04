@@ -7,6 +7,10 @@ import { ImageGallery } from "./components/ImageGallery/ImageGallery";
 import { fetchPictures } from "./picturesApi";
 import { ImageModal } from "./components/ImageModal/ImageModal";
 import { LoadMoreBtn } from "./components/LoadMoreBtn/LoadMoreBtn";
+import { Loader } from "./components/Loader/Loader";
+import { ErrorMessage } from "./components/ErrorMessage/ErrorMessage";
+
+export const perPage = 12;
 
 function App() {
   const [pictures, setPictures] = useState([]);
@@ -16,6 +20,7 @@ function App() {
   const [error, setError] = useState(false);
   const [modalImage, setModalImage] = useState(false);
   const [isShownModal, setIsShownModal] = useState(false);
+  const [loadMoreIsShown, setLoadMoreIsShown] = useState(false);
 
   const handleSearch = async (newQuery) => {
     setQuery(newQuery);
@@ -50,8 +55,9 @@ function App() {
         setError(false);
         const data = await fetchPictures(query, page);
         setPictures((prevData) => {
-          return [...prevData, ...data];
+          return [...prevData, ...data.results];
         });
+        setLoadMoreIsShown(page < data.total_pages);
       } catch (error) {
         setError(true);
       } finally {
@@ -63,17 +69,17 @@ function App() {
   return (
     <div>
       <SearchBar onSearch={handleSearch} />
-      {isLoading && <p>Loading...</p>}
-      {error && <p>Error!</p>}
       {pictures.length > 0 && (
         <ImageGallery pictures={pictures} handleModalImage={handleModalImage} />
       )}
-      {!isLoading && pictures.length === 0 && query && <p>Nothing was found</p>}
-      {!isLoading && pictures.length > 0 && (
-        <LoadMoreBtn handleLoadMore={handleLoadMore} />
-        // <button onClick={handleLoadMore}>Load more</button>
+      {!error && !isLoading && pictures.length === 0 && query && (
+        <p>Nothing was found</p>
       )}
-
+      {!isLoading && error && <ErrorMessage />}
+      {isLoading && <Loader />}
+      {!isLoading && loadMoreIsShown && (
+        <LoadMoreBtn handleLoadMore={handleLoadMore} />
+      )}
       {isShownModal && (
         <ImageModal
           modalImage={modalImage}
