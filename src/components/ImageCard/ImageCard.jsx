@@ -1,11 +1,12 @@
+import css from "./ImageCard.module.css";
+
 export const ImageCard = ({ picture, handleModalImage }) => {
   return (
-    <div>
-      <img
-        src={picture.urls.small}
-        alt={picture.description}
-        onClick={() => handleModalImage(picture.urls.regular)}
-      />
-    </div>
+    <img
+      className={css.ImageGalleryItemImage}
+      src={picture.urls.small}
+      alt={picture.description}
+      onClick={() => handleModalImage(picture.urls.regular)}
+    />
   );
 };

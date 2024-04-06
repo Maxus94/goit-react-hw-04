@@ -1,9 +1,12 @@
+import React from "react";
+import ReactDOM from "react-dom";
 import { useEffect, useState } from "react";
 import "./App.css";
 import { SearchBar } from "./components/SearchBar/SearchBar";
 import { ImageGallery } from "./components/ImageGallery/ImageGallery";
 import { fetchPictures } from "./picturesApi";
-import { Modal } from "./Modal/Modal";
+import { ImageModal } from "./components/ImageModal/ImageModal";
+import { LoadMoreBtn } from "./components/LoadMoreBtn/LoadMoreBtn";
 
 function App() {
   const [pictures, setPictures] = useState([]);
@@ -13,6 +16,7 @@ function App() {
   const [error, setError] = useState(false);
   const [modalImage, setModalImage] = useState(false);
   const [isShownModal, setIsShownModal] = useState(false);
+
   const handleSearch = async (newQuery) => {
     setQuery(newQuery);
     setPage(1);
@@ -25,12 +29,16 @@ function App() {
 
   const handleModalImage = (picture) => {
     setModalImage(picture);
-    toggleModal();
+    openModal();
   };
 
-  const toggleModal = () => {
-    setIsShownModal((prev) => !prev);
-  };
+  function openModal() {
+    setIsShownModal(true);
+  }
+
+  function closeModal() {
+    setIsShownModal(false);
+  }
 
   useEffect(() => {
     async function getImages() {
@@ -62,12 +70,17 @@ function App() {
       )}
       {!isLoading && pictures.length === 0 && query && <p>Nothing was found</p>}
       {!isLoading && pictures.length > 0 && (
-        <button onClick={handleLoadMore}>Load more</button>
+        <LoadMoreBtn handleLoadMore={handleLoadMore} />
+        // <button onClick={handleLoadMore}>Load more</button>
       )}
+
       {isShownModal && (
-        <Modal toggleModal={toggleModal}>
-          <img src={modalImage} alt="" />
-        </Modal>
+        <ImageModal
+          modalImage={modalImage}
+          isShownModal={isShownModal}
+          closeModal={closeModal}
+          descr={query}
+        />
       )}
     </div>
   );
