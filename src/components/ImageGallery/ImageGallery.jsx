@@ -1,8 +1,8 @@
 import { useEffect } from "react";
-import { ImageCard } from "../ImageCard/ImageCard";
+import ImageCard from "../ImageCard/ImageCard";
 import css from "./ImageGallery.module.css";
 
-export const ImageGallery = ({ pictures, handleModalImage }) => {
+const ImageGallery = ({ pictures, handleModalImage }) => {
   useEffect(() => {
     window.scrollBy({
       top: 260 * 3 + 48,
@@ -19,3 +19,5 @@ export const ImageGallery = ({ pictures, handleModalImage }) => {
     </ul>
   );
 };
+
+export default ImageGallery;

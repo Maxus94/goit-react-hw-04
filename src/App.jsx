@@ -2,13 +2,13 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { useEffect, useState } from "react";
 import "./App.css";
-import { SearchBar } from "./components/SearchBar/SearchBar";
-import { ImageGallery } from "./components/ImageGallery/ImageGallery";
-import { fetchPictures } from "./picturesApi";
-import { ImageModal } from "./components/ImageModal/ImageModal";
-import { LoadMoreBtn } from "./components/LoadMoreBtn/LoadMoreBtn";
-import { Loader } from "./components/Loader/Loader";
-import { ErrorMessage } from "./components/ErrorMessage/ErrorMessage";
+import SearchBar from "./components/SearchBar/SearchBar";
+import ImageGallery from "./components/ImageGallery/ImageGallery";
+import fetchPictures from "./picturesApi";
+import ImageModal from "./components/ImageModal/ImageModal";
+import LoadMoreBtn from "./components/LoadMoreBtn/LoadMoreBtn";
+import Loader from "./components/Loader/Loader";
+import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
 
 export const perPage = 12;
 

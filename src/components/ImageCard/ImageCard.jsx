@@ -1,6 +1,6 @@
 import css from "./ImageCard.module.css";
 
-export const ImageCard = ({ picture, handleModalImage }) => {
+const ImageCard = ({ picture, handleModalImage }) => {
   return (
     <img
       className={css.ImageGalleryItemImage}
@@ -10,3 +10,5 @@ export const ImageCard = ({ picture, handleModalImage }) => {
     />
   );
 };
+
+export default ImageCard;

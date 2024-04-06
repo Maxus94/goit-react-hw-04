@@ -3,7 +3,7 @@ import css from "./ImageModal.module.css";
 
 Modal.setAppElement("#root");
 
-export const ImageModal = ({ modalImage, isShownModal, closeModal, descr }) => {
+const ImageModal = ({ modalImage, isShownModal, closeModal, descr }) => {
   return (
     <Modal
       isOpen={isShownModal}
@@ -15,3 +15,5 @@ export const ImageModal = ({ modalImage, isShownModal, closeModal, descr }) => {
     </Modal>
   );
 };
+
+export default ImageModal;

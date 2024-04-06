@@ -1,5 +1,6 @@
 import css from "./SearchBar.module.css";
-export const SearchBar = ({ onSearch }) => {
+
+const SearchBar = ({ onSearch }) => {
   const handleSubmit = (evt) => {
     evt.preventDefault();
     onSearch(evt.target.elements.search.value);
@@ -20,3 +21,5 @@ export const SearchBar = ({ onSearch }) => {
     </header>
   );
 };
+
+export default SearchBar;
